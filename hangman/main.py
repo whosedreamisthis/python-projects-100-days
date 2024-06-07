@@ -2,7 +2,10 @@ import random
 import hangman_art
 import hangman_words
 
+import os
 
+def cls():
+    os.system('cls' if os.name=='nt' else 'clear')
 chosen_word = random.choice(hangman_words.word_list)
 print (hangman_art.logo)
 hidden_word = []
@@ -12,6 +15,10 @@ num_lives = 6
 print(" ".join(hidden_word))
 guesses = []
 while("_" in hidden_word and num_lives > 0):
+   cls()
+   print(" ".join(hidden_word))
+   print(hangman_art.stages[num_lives])
+
    guess = input("guess a letter: ").lower()
    
    if guess in guesses:
@@ -29,9 +36,8 @@ while("_" in hidden_word and num_lives > 0):
          num_lives -= 1
          print("num_lives", num_lives)
 
-      print(" ".join(hidden_word))
-      print(hangman_art.stages[num_lives])
       guesses.append(guess)
+   
 
    
 if num_lives > 0:
