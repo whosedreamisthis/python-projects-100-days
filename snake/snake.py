@@ -1,14 +1,26 @@
 from turtle import Turtle
-class Snake:
-    TURTLE_SIZE = 20
+
+TURTLE_SIZE = 20
+UP = 90
+DOWN = 270
+LEFT = 180
+RIGHT = 0
+
+
+class Snake(Turtle):
+
     def __init__(self):
         self.turtles = []
+        self.create_snake()
+        self.head = self.turtles[0]
 
+    def create_snake(self):
         for i in range(3):
             turtle = Turtle(shape="square")
             turtle.color("white")
             turtle.penup()
-            turtle.goto(-i * self.TURTLE_SIZE, 0)
+
+            turtle.goto(-i * TURTLE_SIZE, 0)
             self.turtles.append(turtle)
 
     def move(self):
@@ -18,15 +30,30 @@ class Snake:
                 new_y = self.turtles[i - 1].ycor()
                 self.turtles[i].goto(new_x, new_y)
 
-        self.turtles[0].forward(20)
+        self.head.forward(20)
+
+    def up(self):
+        if self.head.heading() is not DOWN:
+            self.head.setheading(UP)
+
+    def down(self):
+        if self.head.heading() is not UP:
+            self.head.setheading(DOWN)
+
+    def left(self):
+        if self.head.heading() is not RIGHT:
+            self.head.setheading(LEFT)
+
+    def right(self):
+        if self.head.heading() is not LEFT:
+            self.turtles[0].setheading(RIGHT)
 
     def is_at_edge(self):
         for turtle in self.turtles:
             pos = turtle.position()
             if pos[0] > 280 or \
                     pos[0] < -280 or \
-                    pos[1] > 280 or \
-                    pos[1] < -280:
+                    pos[1] > 300 or \
+                    pos[1] < -300:
                 return True
         return False
-
