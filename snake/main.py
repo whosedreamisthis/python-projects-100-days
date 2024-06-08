@@ -39,10 +39,10 @@ while game_is_on:
         food.move()
         snake.extend()
 
-    for segment in snake.turtles:
-        if segment == snake.head:
-            pass
-        elif snake.head.distance(segment) < 10:
+    segments = snake.turtles[1:]
+
+    for segment in segments:
+        if snake.head.distance(segment) < 10:
             game_is_on = False
             scoreboard.game_over()
 
