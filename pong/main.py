@@ -1,6 +1,7 @@
 from turtle import Screen
 from paddle import Paddle
 from ball import Ball
+from scoreboard import Scoreboard
 import time
 screen = Screen()
 screen.bgcolor('black')
@@ -10,6 +11,7 @@ screen.tracer(0)
 r_paddle = Paddle((350, 0))
 l_paddle = Paddle((-350, 0))
 ball = Ball()
+scoreboard = Scoreboard()
 
 screen.listen()
 screen.onkeypress(r_paddle.go_down, 'Down')
@@ -19,6 +21,7 @@ screen.onkeypress(l_paddle.go_down, 's')
 screen.onkeypress(l_paddle.go_up, 'w')
 
 game_is_on = True
+# scoreboard.display()
 while game_is_on:
     time.sleep(0.1)
     screen.update()
@@ -32,7 +35,13 @@ while game_is_on:
         ball.bounce_x()
         print("made contact")
 
-    ball.process_out_of_bounds()
+    if ball.xcor() > 400:
+        ball.reset_position()
+        scoreboard.increment_left_score()
+
+    if ball.xcor() < -400:
+        ball.reset_position()
+        scoreboard.increment_right_score()
 
 
 screen.exitonclick()

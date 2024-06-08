@@ -20,10 +20,12 @@ class Ball(Turtle):
     def bounce_x(self):
         self.x_move *= -1
 
+    def reset_position(self):
+        self.goto(0, 0)
+        self.x_move *= -1
     def process_out_of_bounds (self):
         position_x = self.position()[0]
         if position_x > 400 or position_x < -400:
-            self.goto(0,0)
             self.x_move *= -1
 
 
