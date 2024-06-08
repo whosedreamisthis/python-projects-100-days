@@ -16,12 +16,15 @@ class Snake(Turtle):
 
     def create_snake(self):
         for i in range(3):
-            turtle = Turtle(shape="square")
-            turtle.color("white")
-            turtle.penup()
+            self.add_segment(-i * TURTLE_SIZE, 0)
 
-            turtle.goto(-i * TURTLE_SIZE, 0)
-            self.turtles.append(turtle)
+    def add_segment(self, x, y):
+        turtle = Turtle(shape="square")
+        turtle.color("white")
+        turtle.penup()
+
+        turtle.goto(x, y)
+        self.turtles.append(turtle)
 
     def move(self):
         for i in range(len(self.turtles) - 1, 0, -1):
@@ -32,20 +35,24 @@ class Snake(Turtle):
 
         self.head.forward(20)
 
+    def extend(self):
+        position = self.turtles[-1].position()
+        self.add_segment(position[0], position[1])
+
     def up(self):
-        if self.head.heading() is not DOWN:
+        if self.head.heading() != DOWN:
             self.head.setheading(UP)
 
     def down(self):
-        if self.head.heading() is not UP:
+        if self.head.heading() != UP:
             self.head.setheading(DOWN)
 
     def left(self):
-        if self.head.heading() is not RIGHT:
+        if self.head.heading() != RIGHT:
             self.head.setheading(LEFT)
 
     def right(self):
-        if self.head.heading() is not LEFT:
+        if self.head.heading() != LEFT:
             self.turtles[0].setheading(RIGHT)
 
     def is_at_edge(self):
