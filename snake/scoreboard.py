@@ -1,21 +1,31 @@
 from turtle import Turtle
-import turtle
+
+FONT = ('Courier', 15, 'normal')
+ALIGNMENT = "center"
+
 class Scoreboard(Turtle):
     def __init__(self):
         super().__init__()
         self.score = 0
-        turtle.penup()
+        self.penup()
+        self.color('white')
+        self.hideturtle()
+        self.goto(0, 260)
+        self.display()
+
     def display(self):
-        turtle.clear()
-        style = ('Courier', 15, 'normal')
-        turtle.color('white')
-        turtle.goto(0, -280)
-        turtle.write(f"Score: {self.score}", False, align="center",font=style)
-        turtle.hideturtle()
+        self.clear()
+
+        self.write(f"Score: {self.score}", False, align=ALIGNMENT, font=FONT)
+
+    def game_over(self):
+        self.goto(0,0)
+        self.write("GAME OVER", False, align=ALIGNMENT, font=FONT)
 
 
     def increment_score(self):
         self.score += 1
         print(f"new score is {self.score}")
+        self.display()
 
 

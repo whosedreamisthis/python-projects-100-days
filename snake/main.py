@@ -29,15 +29,17 @@ while game_is_on:
     time.sleep(0.5)
     snake.move()
 
-    # if snake.is_at_edge():
-        # game_is_on = False
+    if snake.is_at_edge():
+        game_is_on = False
+        scoreboard.game_over()
 
     if snake.head.distance(food) < 15:
         scoreboard.increment_score()
         print('num none num')
         food.move()
 
-    scoreboard.display()
+
+
     screen.update()
 
 screen.exitonclick()
