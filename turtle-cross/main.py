@@ -16,7 +16,6 @@ screen.listen()
 screen.onkey(player.move,"Up")
 
 game_is_on = True
-level = 1
 while game_is_on:
 
     time.sleep(0.1)
@@ -24,8 +23,8 @@ while game_is_on:
     car_manager.create_car()
     if player.is_at_finish_line():
         player.go_to_start()
-        level += 1
         car_manager.level_up()
+        scoreboard.level_up()
     car_manager.move_cars()
 
     for car in car_manager.cars:
