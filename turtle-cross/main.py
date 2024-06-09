@@ -9,6 +9,8 @@ screen.setup(width=600, height=600)
 screen.tracer(0)
 
 player = Player()
+car_manager = CarManager()
+
 
 screen.listen()
 screen.onkey(player.move,"Up")
@@ -16,11 +18,14 @@ screen.onkey(player.move,"Up")
 game_is_on = True
 level = 1
 while game_is_on:
+
     time.sleep(0.1)
     screen.update()
+    car_manager.create_car()
     if player.ycor() > 290:
         player.sety(-290)
         level += 1
+    car_manager.move_cars()
 
 
 
