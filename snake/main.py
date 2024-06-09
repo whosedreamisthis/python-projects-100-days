@@ -30,8 +30,8 @@ while game_is_on:
     snake.move()
 
     if snake.is_at_edge():
-        game_is_on = False
-        scoreboard.game_over()
+        scoreboard.reset()
+        snake.reset()
 
     if snake.head.distance(food) < 15:
         scoreboard.increment_score()
@@ -39,11 +39,8 @@ while game_is_on:
         food.move()
         snake.extend()
 
-    segments = snake.turtles[1:]
-
-    for segment in segments:
+    for segment in snake.turtles[1:]:
         if snake.head.distance(segment) < 10:
-            game_is_on = False
             scoreboard.game_over()
 
 

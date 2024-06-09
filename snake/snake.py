@@ -11,8 +11,7 @@ class Snake(Turtle):
 
     def __init__(self):
         self.turtles = []
-        self.create_snake()
-        self.head = self.turtles[0]
+        self.reset()
 
     def create_snake(self):
         for i in range(3):
@@ -64,3 +63,13 @@ class Snake(Turtle):
                     pos[1] < -300:
                 return True
         return False
+
+    def reset(self):
+        for segment in self.turtles:
+            segment.goto(1080,1080)
+
+        self.turtles.clear()
+        self.create_snake()
+        self.head = self.turtles[0]
+
+
